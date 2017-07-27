@@ -1,36 +1,23 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var path = require("path");
+var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
 
-// Express App
 
-var app = express();
-var PORT = 3000; // process.env.PORT || 
+var app = express(); 
+var PORT = process.env.PORT || 3001; 
 
-// Express app to handle data parsing
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-
-app.get("/:operandA/:operator/:operandB", (req, res) => {
-	let result = false;
-	let operator = req.params.operator;
-
-	switch (operator){
-		case "multiply":
-			result = operandA * operandB;
-		break;
+app.use(bodyParser.json({type:'application/vnd.api+json'}));
 
 
-		case "add":
-			result = operandA + operandB;
-		break;
+require('./app/routing/apiroutes.js')(app); 
+require('./app/routing/htmlroutes.js')(app);
 
-	}
-	if (result)
-		res.end(result.toString());
 
+app.listen(PORT, function() {
+  console.log("App listening on PORT: " + PORT);
 });
 
-app.listen(3000);

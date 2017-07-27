@@ -1,20 +1,13 @@
-var tablearray = [
-    {
-      "name":"Ahmed",
-      "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
-      "scores":[
-          5,
-          1,
-          4,
-          4,
-          5,
-          1,
-          2,
-          5,
-          4,
-          1
-        ]
-    }
-];
+var path = require('path');
 
-module.exports = tablearray;
+module.exports = function(app){
+
+  app.get('/survey', function(req, res){
+    res.sendFile(path.join(__dirname + '/../public/survey.html'));
+  });
+
+  app.use(function(req, res){
+    res.sendFile(path.join(__dirname + '/../public/home.html'));
+  });
+
+}
