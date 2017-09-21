@@ -19,3 +19,4 @@ module.exports = function(app){
 //// Take the data for each friend and compare the difference between each person. Choose the closest match and send to modal for display.
 
 	});
+	}
